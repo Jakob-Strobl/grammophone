@@ -587,13 +587,13 @@ var YYSTATE=YY_START;
 switch($avoiding_name_collisions) {
 case 0: this.begin("COMMENT"); 
 break;
-case 1: return "ARROW"; 
+case 1: this.begin("ESCAPE"); 
 break;
-case 2: return "CHOICE"; 
+case 2: return "ARROW"; 
 break;
-case 3: return "STOP"; 
+case 3: return "CHOICE"; 
 break;
-case 4: console.log("ESCAPE " + yy_.yytext); return "ESCAPE"; 
+case 4: return "STOP"; 
 break;
 case 5: 
 break;
@@ -601,28 +601,34 @@ case 6:
 break;
 case 7: this.begin("NAME"); name = yy_.yytext; 
 break;
-case 8: this.unput("->"); this.begin("INITIAL"); yy_.yytext = name; return "NAME"; 
+case 8: this.begin("ESCAPE"); yy_.yytext = name; return "NAME"; 
 break;
-case 9: this.unput("|"); this.begin("INITIAL"); yy_.yytext = name; return "NAME"; 
+case 9: this.unput("->"); this.begin("INITIAL"); yy_.yytext = name; return "NAME"; 
 break;
-case 10: this.unput("."); this.begin("INITIAL"); yy_.yytext = name; return "NAME"; 
+case 10: this.unput("|"); this.begin("INITIAL"); yy_.yytext = name; return "NAME"; 
 break;
-case 11: yy_.yytext = name; return "NAME"; 
+case 11: this.unput("."); this.begin("INITIAL"); yy_.yytext = name; return "NAME"; 
 break;
-case 12: this.begin("INITIAL"); yy_.yytext = name; return "NAME"; 
+case 12: yy_.yytext = name; return "NAME"; 
 break;
-case 13: name += yy_.yytext; 
+case 13: this.begin("INITIAL"); yy_.yytext = name; return "NAME"; 
 break;
-case 14: this.begin("INITIAL"); 
+case 14: name += yy_.yytext; 
 break;
-case 15: 
+case 15: this.begin("INITIAL"); 
 break;
 case 16: 
 break;
+case 17: 
+break;
+case 18: this.begin("INITIAL"); 
+break;
+case 19: console.log("Escape char is " + yy_.yytext); this.begin("INITIAL"); name += yy_.yytext; return "NAME"; 
+break;
 }
 },
-rules: [/^(?:#)/,/^(?:->)/,/^(?:\|)/,/^(?:\.)/,/^(?:\\.)/,/^(?:$)/,/^(?:[\s\n])/,/^(?:.)/,/^(?:->)/,/^(?:\|)/,/^(?:\.)/,/^(?:$)/,/^(?:[\s\n])/,/^(?:.)/,/^(?:[\n])/,/^(?:[\s])/,/^(?:.)/],
-conditions: {"COMMENT":{"rules":[14,15,16],"inclusive":true},"NAME":{"rules":[8,9,10,11,12,13],"inclusive":true},"INITIAL":{"rules":[0,1,2,3,4,5,6,7],"inclusive":true}}
+rules: [/^(?:#)/,/^(?:\\)/,/^(?:->)/,/^(?:\|)/,/^(?:\.)/,/^(?:$)/,/^(?:[\s\n])/,/^(?:.)/,/^(?:\\)/,/^(?:->)/,/^(?:\|)/,/^(?:\.)/,/^(?:$)/,/^(?:[\s\n])/,/^(?:.)/,/^(?:[\n])/,/^(?:[\s])/,/^(?:.)/,/^(?:[\n])/,/^(?:.)/],
+conditions: {"ESCAPE":{"rules":[18,19],"inclusive":true},"COMMENT":{"rules":[15,16,17],"inclusive":true},"NAME":{"rules":[8,9,10,11,12,13,14],"inclusive":true},"INITIAL":{"rules":[0,1,2,3,4,5,6,7],"inclusive":true}}
 });
 return lexer;
 })();
