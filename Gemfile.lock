@@ -10,6 +10,7 @@ GEM
 
 PLATFORMS
   ruby
+  x64-mingw32
 
 DEPENDENCIES
   ejs (~> 1.1.1)
@@ -17,4 +18,4 @@ DEPENDENCIES
   sprockets (~> 3.7.1)
 
 BUNDLED WITH
-   2.1.4
+   2.2.14

@@ -26,7 +26,7 @@ var Grammar = function() {
       // for a particular nonterminal may be at different places in the
       // list. We want to preserve the order in the user's input.
     
-      var rules = Parser.parse(spec);
+      var rules = parser.parse(spec);
       var productions = [];
     
       for (i = 0; i < rules.length; i++) {
