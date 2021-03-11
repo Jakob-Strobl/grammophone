@@ -10,7 +10,7 @@ GRAMMAR_ASSETS = [
 ]
 
 file "src/parser.js" => ["src/parser.l", "src/parser.y"] do
-  system "jison src/parser.y src/parser.l --module-type=js --output-file=src/Parser.js && mv src/Parser.js src/parser.js"
+  system "jison src/parser.y src/parser.l --module-type=js --output-file=parser.js && move parser.js src/parser.js"
 end
 
 task :default => "src/parser.js" do
