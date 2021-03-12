@@ -72,12 +72,12 @@
   }
 */
 var parser = (function(){
-var o=function(k,v,o,l){for(o=o||{},l=k.length;l--;o[k[l]]=v);return o},$V0=[1,4],$V1=[6,11],$V2=[2,9],$V3=[1,10];
+var o=function(k,v,o,l){for(o=o||{},l=k.length;l--;o[k[l]]=v);return o},$V0=[1,4],$V1=[6,11],$V2=[2,10],$V3=[1,10],$V4=[1,11];
 var parser = {trace: function trace () { },
 yy: {},
-symbols_: {"error":2,"spec":3,"rules":4,"rule":5,"STOP":6,"NAME":7,"ARROW":8,"productions":9,"tokens":10,"CHOICE":11,"$accept":0,"$end":1},
-terminals_: {2:"error",6:"STOP",7:"NAME",8:"ARROW",11:"CHOICE"},
-productions_: [0,[3,1],[3,0],[4,3],[4,2],[5,3],[9,1],[9,3],[10,2],[10,0]],
+symbols_: {"error":2,"spec":3,"rules":4,"rule":5,"STOP":6,"NAME":7,"ARROW":8,"productions":9,"tokens":10,"CHOICE":11,"SPACE":12,"$accept":0,"$end":1},
+terminals_: {2:"error",6:"STOP",7:"NAME",8:"ARROW",11:"CHOICE",12:"SPACE"},
+productions_: [0,[3,1],[3,0],[4,3],[4,2],[5,3],[9,1],[9,3],[10,2],[10,2],[10,0]],
 performAction: function anonymous(yytext, yyleng, yylineno, yy, yystate /* action[1] */, $$ /* vstack */, _$ /* lstack */) {
 /* this == yyval */
 
@@ -101,16 +101,16 @@ break;
 case 6:
  this.$ = [$$[$0]]; 
 break;
-case 8:
+case 8: case 9:
  this.$ = $$[$0]; $$[$0].unshift($$[$0-1]); 
 break;
-case 9:
+case 10:
  this.$ = []; 
 break;
 }
 },
-table: [{1:[2,2],3:1,4:2,5:3,7:$V0},{1:[3]},{1:[2,1]},{6:[1,5]},{8:[1,6]},{1:[2,4],4:7,5:3,7:$V0},o($V1,$V2,{9:8,10:9,7:$V3}),{1:[2,3]},{6:[2,5]},{6:[2,6],11:[1,11]},o($V1,$V2,{10:12,7:$V3}),o($V1,$V2,{10:9,9:13,7:$V3}),o($V1,[2,8]),{6:[2,7]}],
-defaultActions: {2:[2,1],7:[2,3],8:[2,5],13:[2,7]},
+table: [{1:[2,2],3:1,4:2,5:3,7:$V0},{1:[3]},{1:[2,1]},{6:[1,5]},{8:[1,6]},{1:[2,4],4:7,5:3,7:$V0},o($V1,$V2,{9:8,10:9,7:$V3,12:$V4}),{1:[2,3]},{6:[2,5]},{6:[2,6],11:[1,12]},o($V1,$V2,{10:13,7:$V3,12:$V4}),o($V1,$V2,{10:14,7:$V3,12:$V4}),o($V1,$V2,{10:9,9:15,7:$V3,12:$V4}),o($V1,[2,8]),o($V1,[2,9]),{6:[2,7]}],
+defaultActions: {2:[2,1],7:[2,3],8:[2,5],15:[2,7]},
 parseError: function parseError (str, hash) {
     if (hash.recoverable) {
         this.trace(str);
@@ -589,46 +589,52 @@ case 0: this.begin("COMMENT");
 break;
 case 1: this.begin("ESCAPE"); 
 break;
-case 2: return "ARROW"; 
+case 2: this.unput("  "); this.begin("DOUBLE_SPACE"); 
 break;
-case 3: return "CHOICE"; 
+case 3: return "ARROW"; 
 break;
-case 4: return "STOP"; 
+case 4: console.log("Choice -> " + this.upcomingInput()); return "CHOICE"; 
 break;
-case 5: 
+case 5: return "STOP"; 
 break;
 case 6: 
 break;
-case 7: this.begin("NAME"); name = yy_.yytext; 
+case 7: 
 break;
-case 8: this.begin("ESCAPE"); yy_.yytext = name; return "NAME"; 
+case 8: this.begin("NAME"); name = yy_.yytext; 
 break;
-case 9: this.unput("->"); this.begin("INITIAL"); yy_.yytext = name; return "NAME"; 
+case 9: this.begin("ESCAPE"); yy_.yytext = name; return "NAME"; 
 break;
-case 10: this.unput("|"); this.begin("INITIAL"); yy_.yytext = name; return "NAME"; 
+case 10: this.unput("  "); this.begin("DOUBLE_SPACE"); yy_.yytext = name; return "NAME"; 
 break;
-case 11: this.unput("."); this.begin("INITIAL"); yy_.yytext = name; return "NAME"; 
+case 11: this.unput("->"); this.begin("INITIAL"); yy_.yytext = name; return "NAME"; 
 break;
-case 12: yy_.yytext = name; return "NAME"; 
+case 12: this.unput("|"); this.begin("INITIAL"); yy_.yytext = name; return "NAME"; 
 break;
-case 13: this.begin("INITIAL"); yy_.yytext = name; return "NAME"; 
+case 13: this.unput("."); this.begin("INITIAL"); yy_.yytext = name; return "NAME"; 
 break;
-case 14: name += yy_.yytext; 
+case 14: yy_.yytext = name; return "NAME"; 
 break;
-case 15: this.begin("INITIAL"); 
+case 15: this.begin("INITIAL"); yy_.yytext = name; return "NAME"; 
 break;
-case 16: 
+case 16: name += yy_.yytext; 
 break;
-case 17: 
+case 17: this.begin("INITIAL"); 
 break;
-case 18: this.begin("INITIAL"); 
+case 18: 
 break;
-case 19: console.log("Escape char is " + yy_.yytext); this.begin("INITIAL"); name += yy_.yytext; return "NAME"; 
+case 19: 
+break;
+case 20: this.begin("INITIAL"); 
+break;
+case 21: console.log("Escape char is " + yy_.yytext); this.begin("INITIAL"); return "NAME"; 
+break;
+case 22: console.log("DOUBLE SPACE '" + yy_.yytext + "'"); this.begin("INITIAL"); yy_.yytext = " "; return "SPACE" 
 break;
 }
 },
-rules: [/^(?:#)/,/^(?:\\)/,/^(?:->)/,/^(?:\|)/,/^(?:\.)/,/^(?:$)/,/^(?:[\s\n])/,/^(?:.)/,/^(?:\\)/,/^(?:->)/,/^(?:\|)/,/^(?:\.)/,/^(?:$)/,/^(?:[\s\n])/,/^(?:.)/,/^(?:[\n])/,/^(?:[\s])/,/^(?:.)/,/^(?:[\n])/,/^(?:.)/],
-conditions: {"ESCAPE":{"rules":[18,19],"inclusive":true},"COMMENT":{"rules":[15,16,17],"inclusive":true},"NAME":{"rules":[8,9,10,11,12,13,14],"inclusive":true},"INITIAL":{"rules":[0,1,2,3,4,5,6,7],"inclusive":true}}
+rules: [/^(?:#)/,/^(?:\\)/,/^(?:  )/,/^(?:->)/,/^(?:\|)/,/^(?:\.)/,/^(?:$)/,/^(?:[\s\n])/,/^(?:.)/,/^(?:\\)/,/^(?:  )/,/^(?:->)/,/^(?:\|)/,/^(?:\.)/,/^(?:$)/,/^(?:[\s\n])/,/^(?:.)/,/^(?:[\n])/,/^(?:[\s])/,/^(?:.)/,/^(?:[\n])/,/^(?:.)/,/^(?:  )/],
+conditions: {"DOUBLE_SPACE":{"rules":[22],"inclusive":true},"ESCAPE":{"rules":[20,21],"inclusive":true},"COMMENT":{"rules":[17,18,19],"inclusive":true},"NAME":{"rules":[9,10,11,12,13,14,15,16],"inclusive":true},"INITIAL":{"rules":[0,1,2,3,4,5,6,7,8],"inclusive":true}}
 });
 return lexer;
 })();

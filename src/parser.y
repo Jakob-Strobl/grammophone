@@ -23,5 +23,6 @@ productions
 
 tokens
   : NAME tokens { $$ = $2; $2.unshift($1); }
+  | SPACE tokens { $$ = $2; $2.unshift($1); }
   | { $$ = []; }
   ;
